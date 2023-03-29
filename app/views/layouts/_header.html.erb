@@ -1,0 +1,49 @@
+<header>
+  <nav class="navbar vavbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <%= link_to "Bookers", root_path, class: "navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+            <%= link_to root_path, class: "nav-link text-light" do %>
+              <i class="fas fa-home"></i>Home
+            <% end %>
+            <%= link_to root_path, class: "nav-link text-light" do %>
+              <i class="fas fa-users"></i>User
+            <% end %>
+            <%= link_to root_path, class: "nav-link text-light" do %>
+              <i class="fas fa-book-open"></i>Books
+            <% end %>
+            <%= link_to root_path, class: "nav-link text-light" do %>
+              <i class="fas fa-sign-out-alt"></i>Log out
+            <% end %>
+          <% else %>
+            <li>
+              <%= link_to root_path, class: "nav-link text-light" do %>
+                <i class="fas fa-home"></i>Home
+              <% end %>
+            </li>
+            <li>
+              <%= link_to about_path, class: "nav-link text-light" do %>
+                <i class="fas fa-link"></i>About
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_user_registration_path, class: "nav-link text-light" do %>
+                <i class="fas fa-user-plus"></i>Sign up
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_user_session_path, class: "nav-link text-light" do %>
+                <i class="fas fa-sign-in-alt"></i>Log in
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
