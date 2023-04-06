@@ -2,8 +2,20 @@ class BooksController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
 
   def index
+    #to = Time.current.at_end_of_day
+    #from = (to - 6.day).at_beginning_of_day
+    #@books = Book.all.sort {|a,b|
+    #  b.favorites.where(created_at: from...to).size <=>
+    #  a.favorites.where(created_at: from...to).size
+    #}##sort{|a, b| a.to_i <=> b.to_i }だと、昇順になりますが、今回bを先に記述してるので降順（多い順）に並び変えができる
+    to = Time.current.at_end_of_day
+    from = (to - 6.day).at_beginning_of_day
+    @books = Book.includes(:favorited_usesrs).
+      sort_by {|x|
+        x.favorited_usesrs.includes(:favorites).where(created_at: from...to).size
+      }.reverse
     @book = Book.new
-    @books = Book.all
+
   end
 
   def create

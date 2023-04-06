@@ -1,0 +1,22 @@
+<h1 id="room" data-room="<%= @room.id %>" data-user="<%= current_user.id %>">
+  <%= @user.name %>さんとのチャット
+</h1>
+
+<div class="message" style="width: 400px;">
+  <% if chat.user_id == current_user.id %>
+    <% @chats.each do |chat| %>
+      <p style="text-align: right;"><%= chat.message %></p>
+    <% else %>
+      <p style="text-align: left;"><%= chat.message %></p>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="errors">
+  <%= render "layouts/errors", obk: @chat %>
+</div>
+
+<%= form_with model model: @chat, local: false do |f| %>
+  <%= f.text_field :message %>
+  <%= f.hidden_field :room_id %>
+<% end %>
