@@ -3,8 +3,8 @@
 </h1>
 
 <div class="message" style="width: 400px;">
-  <% if chat.user_id == current_user.id %>
-    <% @chats.each do |chat| %>
+  <% @chats.each do |chat| %>
+    <% if chat.user_id == current_user.id %>
       <p style="text-align: right;"><%= chat.message %></p>
     <% else %>
       <p style="text-align: left;"><%= chat.message %></p>
@@ -13,10 +13,10 @@
 </div>
 
 <div class="errors">
-  <%= render "layouts/errors", obk: @chat %>
+  <%= render "layouts/error", obj: @chat %>
 </div>
 
-<%= form_with model model: @chat, local: false do |f| %>
+<%= form_with model: @chat, local: false do |f| %>
   <%= f.text_field :message %>
   <%= f.hidden_field :room_id %>
 <% end %>
