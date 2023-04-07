@@ -29,6 +29,7 @@ class User < ApplicationRecord
   has_many :user_rooms
   has_many :rooms, through: :user_rooms
   has_many :chats
+  has_many :view_counts, dependent: :destroy
 
   def get_profile_image(width, height)
     unless profile_image.attached?
